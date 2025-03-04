@@ -1,5 +1,7 @@
 # Flashcards Application
 
+This application is a web-based flashcard system designed to help users learn and review information interactively. It features a collection of flashcards that cover various topics, allowing users to flip between questions and answers. The app is built using FastAPI for the backend and serves HTML content to the frontend, providing a seamless and engaging learning experience.
+
 ## Building and Running the Docker Container
 
 To build and run the Docker container for this application, follow these steps:
