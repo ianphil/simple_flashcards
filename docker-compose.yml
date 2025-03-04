@@ -13,6 +13,6 @@ services:
     env_file:
       - .env
     environment:
-      - NGROK_PORT=api:5050
+      - NGROK_PORT=api:8000
     ports:
       - "4040:4040" # ngrok web interface
