@@ -7,3 +7,11 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8000"
+
+  ngrok:
+    image: wernight/ngrok
+    environment:
+      - NGROK_PORT=api:5050
+      - NGROK_AUTHTOKEN=<ngrok_token> # https://dashboard.ngrok.com/
+    ports:
+      - "4040:4040" # ngrok web interface
