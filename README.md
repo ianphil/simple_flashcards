@@ -11,9 +11,9 @@ sequenceDiagram
     participant HTML
 
     User->>Endpoint: GET /
-    Endpoint->>HTML: Serve flashcards.html
+    Endpoint->>HTML: Read flashcards.html
     HTML->>Endpoint: GET /flashcards
-    Endpoint->>HTML: Serve flashcards.json
+    Endpoint->>HTML: Read flashcards.json
     HTML->>User: Serve html
 ```
 
