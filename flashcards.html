@@ -156,14 +156,14 @@
             updateCard(currentCardIndex);
         }
         
-        // Fetch flashcard data using HTMX
-        htmx.onLoad(function(content) {
-            flashcardData = JSON.parse(content);
-            updateCard(currentCardIndex);
-        });
-
-        // Trigger the HTMX request to fetch flashcard data
-        htmx.ajax('GET', '/flashcards', '#flashcard-data');
+        // Fetch flashcard data using Fetch API
+        fetch('/flashcards')
+            .then(response => response.json())
+            .then(data => {
+                flashcardData = data;
+                updateCard(currentCardIndex);
+            })
+            .catch(error => console.error('Error fetching flashcard data:', error));
     </script>
     
     <!-- Bootstrap Bundle with Popper -->
