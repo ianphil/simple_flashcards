@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Claude Capabilities Flashcards</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        .card-container {
+            height: 300px;
+            margin-bottom: 30px;
+        }
+        
+        .flashcard {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+        }
+        
+        .card-front, .card-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            backface-visibility: hidden;
+            transition: transform 0.6s;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .card-front {
+            background-color: #f8f9fa;
+            border: 2px solid #0d6efd;
+            transform: rotateY(0deg);
+        }
+        
+        .card-back {
+            background-color: #e7f5ff;
+            border: 2px solid #0d6efd;
+            transform: rotateY(180deg);
+            visibility: hidden;
+        }
+        
+        .flashcard.flipped .card-front {
+            transform: rotateY(180deg);
+            visibility: hidden;
+        }
+        
+        .flashcard.flipped .card-back {
+            transform: rotateY(0deg);
+            visibility: visible;
+        }
+        
+        .small-text {
+            font-size: 12px;
+            position: absolute;
+            bottom: 10px;
+            right: 10px;
+            color: #6c757d;
+        }
+        
+        .content-area {
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container py-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="text-center mb-5">
+                    <h1 class="display-5 fw-bold text-primary mb-2">Claude Capabilities</h1>
+                    <p class="lead">Learn about what Claude can do with these flashcards</p>
+                </div>
+                
+                <div class="card shadow-sm p-4 mb-4">
+                    <div class="d-flex justify-content-between align-items-center mb-3">
+                        <h4 class="card-title mb-0" id="card-counter">Card 1 of 10</h4>
+                        <div>
+                            <button class="btn btn-outline-secondary me-2" onclick="prevCard()">Previous</button>
+                            <button class="btn btn-primary" onclick="nextCard()">Next</button>
+                        </div>
+                    </div>
+                    
+                    <div class="card-container">
+                        <div class="flashcard" id="flashcard" onclick="flipCard()">
+                            <div class="card-front">
+                                <h3 class="fw-bold text-primary mb-4">Question:</h3>
+                                <div class="content-area">
+                                    <p class="fs-5" id="card-question"></p>
+                                </div>
+                                <p class="small-text">Click to flip</p>
+                            </div>
+                            <div class="card-back">
+                                <h3 class="fw-bold text-primary mb-4">Answer:</h3>
+                                <div class="content-area">
+                                    <p class="fs-5" id="card-answer"></p>
+                                </div>
+                                <p class="small-text">Click to flip back</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-4">
+                    <p class="text-muted">Click on the card to flip between question and answer</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Flashcard data as JSON object
+        const flashcardData = {
+            "cards": [
+                {
+                    "id": 1,
+                    "front": "What type of conversations can Claude handle?",
+                    "back": "Claude can engage in detailed discussions across a wide range of topics, from casual conversations to complex technical subjects. It can provide nuanced perspectives, break down complicated concepts, explain difficult ideas with analogies, and adjust its communication style based on context."
+                },
+                {
+                    "id": 2,
+                    "front": "What are \"artifacts\" in Claude and what types are available?",
+                    "back": "Artifacts are self-contained content blocks that Claude can create and modify throughout a conversation. Types include:<br>- Code (in various programming languages)<br>- Documents (formatted text with Markdown)<br>- HTML (web pages)<br>- SVG Graphics (vector images)<br>- Mermaid Diagrams (flowcharts, sequence diagrams)<br>- React Components (interactive UI elements)"
+                },
+                {
+                    "id": 3,
+                    "front": "What is Claude's \"analysis tool\" and when should it be used?",
+                    "back": "The analysis tool is a JavaScript REPL (Read-Eval-Print Loop) that can:<br>- Solve complex mathematical problems requiring high precision<br>- Analyze uploaded files (especially large datasets)<br>- Process and transform data<br>- Test algorithms before implementation<br>It's best used when calculations are too complex for mental math or when analyzing large files."
+                },
+                {
+                    "id": 4,
+                    "front": "How does Claude work with files?",
+                    "back": "Claude can:<br>- Read and analyze files uploaded by users<br>- Process structured data from CSVs, Excel files, etc.<br>- Extract information from documents<br>- Generate visualizations based on file data<br>- Perform statistical analysis on datasets"
+                },
+                {
+                    "id": 5,
+                    "front": "What code-related capabilities does Claude have?",
+                    "back": "Claude can:<br>- Write code in multiple programming languages<br>- Debug existing code<br>- Explain code functionality<br>- Optimize algorithms<br>- Design software architecture<br>- Create interactive components with React<br>- Generate data visualizations"
+                },
+                {
+                    "id": 6,
+                    "front": "What types of creative content can Claude generate?",
+                    "back": "Claude can create:<br>- Stories, essays, and scripts<br>- Marketing copy and social media content<br>- Emails and professional communications<br>- Educational materials<br>- Structured documents like reports and presentations<br>- Content in various tones and styles"
+                },
+                {
+                    "id": 7,
+                    "front": "What visual content can Claude create?",
+                    "back": "Claude can generate:<br>- SVG graphics and illustrations<br>- Flowcharts and diagrams using Mermaid<br>- Data visualizations through React components<br>- Simple charts and graphs<br>- Interactive UI prototypes"
+                },
+                {
+                    "id": 8,
+                    "front": "What data analysis capabilities does Claude have?",
+                    "back": "Claude can:<br>- Process and clean datasets<br>- Perform statistical analysis<br>- Identify trends and patterns<br>- Generate insights from data<br>- Create visualizations of data<br>- Make recommendations based on data analysis"
+                },
+                {
+                    "id": 9,
+                    "front": "What language capabilities does Claude have?",
+                    "back": "Claude can communicate fluently in multiple languages beyond English, allowing for conversations, content creation, and assistance across language barriers."
+                },
+                {
+                    "id": 10,
+                    "front": "How can Claude help with problem-solving?",
+                    "back": "Claude can:<br>- Break complex problems into manageable steps<br>- Apply logical reasoning to find solutions<br>- Suggest alternative approaches when stuck<br>- Explain thought processes behind solutions<br>- Help troubleshoot issues step-by-step<br>- Collaborate interactively on evolving problems"
+                }
+            ]
+        };
+        
+        let currentCardIndex = 0;
+        
+        function flipCard() {
+            document.getElementById('flashcard').classList.toggle('flipped');
+        }
+        
+        function updateCard(index) {
+            const questionElement = document.getElementById('card-question');
+            const answerElement = document.getElementById('card-answer');
+            const counterElement = document.getElementById('card-counter');
+            const flashcardElement = document.getElementById('flashcard');
+            
+            // Reset card to front side when changing cards
+            if (flashcardElement.classList.contains('flipped')) {
+                flashcardElement.classList.remove('flipped');
+            }
+            
+            // Update content
+            questionElement.textContent = flashcardData.cards[index].front;
+            answerElement.innerHTML = flashcardData.cards[index].back;
+            counterElement.textContent = `Card ${index + 1} of ${flashcardData.cards.length}`;
+        }
+        
+        function nextCard() {
+            currentCardIndex = (currentCardIndex + 1) % flashcardData.cards.length;
+            updateCard(currentCardIndex);
+        }
+        
+        function prevCard() {
+            currentCardIndex = (currentCardIndex - 1 + flashcardData.cards.length) % flashcardData.cards.length;
+            updateCard(currentCardIndex);
+        }
+        
+        // Initialize the first card
+        document.addEventListener('DOMContentLoaded', function() {
+            updateCard(currentCardIndex);
+        });
+        
+        // Initialize the first card immediately as well
+        updateCard(currentCardIndex);
+    </script>
+    
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
