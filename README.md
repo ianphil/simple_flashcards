@@ -17,6 +17,30 @@ sequenceDiagram
     Endpoint->>JSON: Serve flashcards.json
 ```
 
+## Running the Application with Docker Compose
+
+To run the application using Docker Compose, follow these steps:
+
+1. **Rename the Environment File**
+
+   First, rename the `.env.sample` file to `.env`:
+
+   ```bash
+   mv .env.sample .env
+   ```
+
+   Ensure that you replace `<ngrok_token>` in the `.env` file with your actual ngrok token.
+
+2. **Run Docker Compose**
+
+   Use the following command to start the services defined in the `docker-compose.yml` file:
+
+   ```bash
+   docker-compose up
+   ```
+
+   This will start both the API and ngrok services. The application will be accessible at `http://localhost:8000`, and the ngrok web interface will be available at `http://localhost:4040`.
+
 ## Building and Running the Docker Container
 
 To build and run the Docker container for this application, follow these steps:
