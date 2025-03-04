@@ -9,12 +9,12 @@ sequenceDiagram
     participant User
     participant Endpoint
     participant HTML
-    participant JSON
 
     User->>Endpoint: GET /
     Endpoint->>HTML: Serve flashcards.html
-    User->>Endpoint: GET /flashcards
-    Endpoint->>JSON: Serve flashcards.json
+    HTML->>Endpoint: GET /flashcards
+    Endpoint->>HTML: Serve flashcards.json
+    HTML->>User: Serve html
 ```
 
 ## Running the Application with Docker Compose
