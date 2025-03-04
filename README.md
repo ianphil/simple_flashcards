@@ -41,7 +41,7 @@ To build and run the Docker container for this application, follow these steps:
 
 ## Development Tools Used
 
-This project was developed using the following tools:
+This project was developed in less than an hour using the following tools:
 
 - **Visual Studio Code (VSCode)**: A versatile and powerful source code editor that supports a wide range of programming languages and extensions. It was used for writing, debugging, and managing the codebase. [Link to VSCode](https://code.visualstudio.com/)
 
