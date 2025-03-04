@@ -38,3 +38,15 @@ To build and run the Docker container for this application, follow these steps:
    ```
 
    This will start the application, and it will be accessible at `http://localhost:8000`.
+
+## Development Tools Used
+
+This project was developed using the following tools:
+
+- **Visual Studio Code (VSCode)**: A versatile and powerful source code editor that supports a wide range of programming languages and extensions. It was used for writing, debugging, and managing the codebase. [Link to VSCode](https://code.visualstudio.com/)
+
+- **Grok**: An AI-powered coding assistant that provides real-time code suggestions and explanations, helping to improve coding efficiency and learning. [Link to Grok](https://x.ai/)
+
+- **Aider**: A tool that assists in generating and refining code, documentation, and other development tasks through AI-driven suggestions and automation. [Link to Aider](https://aider.chat/)
+
+These tools significantly enhanced the development process, making it more efficient and collaborative.
